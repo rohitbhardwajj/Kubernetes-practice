@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: task-vault-backend-container
+          image: rohit20000/task-vault-backend
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_URL
+              value: "mongodb+srv://rohit:7290080590@todo.drqki83.mongodb.net/"
+
